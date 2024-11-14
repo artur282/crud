@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams,useNavigate, Navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase/config";
-import { collection, addDoc, doc, updateDoc, getDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 
-function CrearUsuario() {
+function ActualizarUsuario() {
   const valorInicial = {
     nombre: "",
     apellido: "",
@@ -22,25 +22,23 @@ function CrearUsuario() {
   const navigate = useNavigate();
 
   const [usuario, setUsuario] = useState(valorInicial);
-  const [subId, setSubId] = useState(id);
 
   const capturarDatos = (e) => {
     const { name, value } = e.target;
     setUsuario({ ...usuario, [name]: value });
   };
 
-  const guardarDatos = async (e) => {
+  const actualizarUsuario = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "estudiante"), usuario);
+      const userDoc = doc(db, "estudiante", id);
+      await updateDoc(userDoc, usuario);
       setUsuario({ ...valorInicial });
-      navigate("/"); 
+      navigate("/"); // Navigate to another page after updating
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("Error updating document: ", error);
     }
   };
-
-
 
   const obtenerUsuario = async (valorId) => {
     try {
@@ -57,16 +55,16 @@ function CrearUsuario() {
   };
 
   useEffect(() => {
-    if (subId !== "") {
-      obtenerUsuario(subId);
+    if (id) {
+      obtenerUsuario(id);
     }
-  }, [subId]);
+  }, [id]);
 
   return (
     <div className="col-md-6 offset-md-3">
       <div className="card card-body">
-        <form onSubmit={guardarDatos}>
-          <h2 className="text-center mb-3 ">Crear usuario</h2>
+        <form onSubmit={actualizarUsuario}>
+          <h2 className="text-center mb-3">Actualizar usuario</h2>
           <div className="mb-3">
             <label>Nombre:</label>
             <input
@@ -219,7 +217,7 @@ function CrearUsuario() {
           </div>
 
           <button className="btn btn-primary form-control">
-            Guardar Usuario
+            Actualizar Usuario
           </button>
         </form>
       </div>
@@ -227,4 +225,4 @@ function CrearUsuario() {
   );
 }
 
-export default CrearUsuario;
+export default ActualizarUsuario;

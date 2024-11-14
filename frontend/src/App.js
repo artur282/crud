@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Navegacion from "./components/Navegacion";
 import CrearUsuario from "./components/CrearUsuario";
 import ListaUsuario from "./components/ListaUsuario";
+import ActualizarUsuario from "./components/EditarUsuario";
 
 class App extends Component {
   render() {
@@ -14,7 +15,7 @@ class App extends Component {
           <Routes> 
             <Route path="/" element={<ListaUsuario />} />
             <Route path="/CrearUsuario" element={<CrearUsuario />} />
-            <Route path="/edit/:id" element={<CrearUsuario />} />
+            <Route path="/edit/:id" element={<ActualizarUsuario />} />
           </Routes>
         </div>
       </div>

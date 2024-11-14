@@ -7,7 +7,7 @@ const Navegacion = () => {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
           <Link className="navbar-brand" to={"/"}>
-            Usuario
+            Estudiantes
           </Link>
           <button
             className="navbar-toggler"
@@ -24,12 +24,12 @@ const Navegacion = () => {
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <Link className="nav-link" to={"/"}>
-                  Lista Usuario
+                  Lista Estudiantes
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to={"/CrearUsuario"}>
-                 Crear Usuario
+                 Crear Estudiante
                </Link>
               </li>
             </ul>
